@@ -125,7 +125,7 @@ def lookingDB_thread():
         time.sleep(1)
 
 def get_info(data):
-    respon = requests.get("http://127.0.0.1:8080/api/question/" + str(data) + "/?format=json")
+    respon = requests.get("http://127.0.0.1:8000/api/question/" + str(data) + "/?format=json")
     jsondata = json.loads(respon.text)
     return jsondata
 

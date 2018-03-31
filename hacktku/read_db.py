@@ -65,7 +65,7 @@ def same_new_fight(nickname):
     db.commit()
 
 def get_score(nickname):
-    respon = requests.get("http://127.0.0.1:8080/api/userprofile/" + str(nickname) + "/?format=json")
+    respon = requests.get("http://127.0.0.1:8000/api/userprofile/" + str(nickname) + "/?format=json")
     jsondata = json.loads(respon.text)
     score = str(jsondata['score'])
     return int(score)
@@ -76,7 +76,7 @@ def add_score(nickname, score):
         "id": nickname,
         "score": score
     }
-    r = requests.put('http://127.0.0.1:8080/api/userprofile/' + str(nickname) + '/', json=payload)
+    r = requests.put('http://127.0.0.1:8000/api/userprofile/' + str(nickname) + '/', json=payload)
 
 
 #print new_fight(2)

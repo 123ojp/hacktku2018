@@ -133,7 +133,7 @@ body {
 }
 
 
-#again_btn, #info_btn, #again_btn_time, #info_btn_time, #answer, {
+#again_btn, #info_btn, #again_btn_time, #info_btn_time, #answer{
     background-color: #80bfff;
     width: 340px;
     font-size: 20px;

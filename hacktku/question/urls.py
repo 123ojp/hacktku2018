@@ -5,5 +5,6 @@ from . import views
 urlpatterns = [
     url(r'^sign-up$', views.SignUp.as_view(), name='sign-up'),
     url(r'^$', views.index, name='index'),
+    url(r'^game/$', views.game, name='game'),
     url(r'^dashboard/$', views.UserList.as_view(), name='dashboard'),
 ]

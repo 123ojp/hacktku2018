@@ -41,3 +41,9 @@ class UserList(generic.ListView):
 
 def index(request):
     return render(request, 'index.html')
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def game(request):
+    return render(request, 'game.html')
