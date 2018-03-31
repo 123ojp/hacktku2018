@@ -1,0 +1,38 @@
+{% load bootstrap4 %}
+{% load fontawesome %}
+{% load i18n %}
+{% load static %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript jquery=1 %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>阿肥小公主</title>
+</head>
+<style>
+    * {
+        font-family: 微軟正黑體, Verdana, Arial, Helvetica, sans-serif;
+    }
+
+     
+
+</style>
+{% block extrahead %}
+{% endblock %}
+
+<body>
+{% block index %}
+{% endblock %}
+{% block navbar %}
+    {% include "_navbar.html" %}
+{% endblock %}
+<div id="container " class="container">
+    {% bootstrap_messages %}
+    {% block content %}
+    {% endblock %}
+</div>
+
+
+</body>
+</html>

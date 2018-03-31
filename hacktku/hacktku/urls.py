@@ -16,17 +16,21 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-
 from rest_framework.routers import DefaultRouter
 from question import views
+from django.conf.urls.static import static
 
+from . import settings
 
 router = DefaultRouter()
 router.register(r'userprofile', views.UserProfileViewSet)
 router.register(r'question', views.QuestionViewSet)
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^question/', include('question.urls')),
-    url(r'^api/', include(router.urls))
-]
+                  url(r'^', include('django.contrib.auth.urls')),
+                  url(r'^admin/', admin.site.urls),
+                  url(r'^', include('question.urls')),
+                  url(r'^api/', include(router.urls)),
+
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,
+                                                                                           document_root=settings.MEDIA_ROOT)
