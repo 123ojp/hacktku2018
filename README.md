@@ -9,7 +9,9 @@
 3. 執行 manage.py (Django port:8000)
 
 ## requirement
-1. requests
+1. Python3
 2. Django
-3. gevent-websocket
-4. flask
+3. Flask
+4. Gevent-websocket
+5. Requests
+
