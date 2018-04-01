@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load  static %}
+
+{% block content %}
+    <div class="well well-lg">
+
+        <h2 class="mt-5">兌換頁面</h2>
+
+        <table class="table table-bordered mt-5">
+            <thead>
+            <tr>
+                <th>名字</th>
+                <th>目前積分</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+
+                    <td>
+                        {{ object.first_name }}
+                    </td>
+                    <td>
+                        {{ object.score }}
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+            <table class="table table-bordered mt-5">
+            <thead>
+            <tr>
+                <th>兌換商品名稱</th>
+                <th>兌換按鈕</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+
+                    <td>
+                        {{ object.first_name }}
+                    </td>
+                    <td>
+                        {{ object.score }}
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+
+
+
+
+
+    </div>
+
+{% endblock %}

@@ -1,7 +1,11 @@
 {% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8">
     <title>A_Fei</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,36 +17,48 @@
     <script type="text/javascript">
         var nickname = "{{ request.user.id }}";
     </script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/alertify.min.js" defer></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}" defer></script>
+    <style>* {
+        font-family: 微軟正黑體, Verdana, Arial, Helvetica, sans-serif;
+    }</style>
 </head>
 <body>
 <div id="app">
     <!--Start Page-->
     <div class="start_page" id="start_div">
-        <img src="{% static 'image/logo.png' %}" alt="start" id="start_img"><br>
-        <button class="primary" id="find_btn">尋找隊友</button>
-        <button class="primary" id="start_btn">開始答題</button>
+        <img src="{% static 'image/logo.png' %}" alt="start" id="start_img"><br><br>
+        <h3 id="teamate_2">隊友名稱:<span  id="teamate_"></span></h3>
+        <img style="height: 90px" id="loading_gif" src="{% static 'image/loading.gif' %}" alt="start"><br><br>
+        <h3 id="loading_h3">尋找隊友中</h3>
+        <button type="button" class="btn btn-warning" id="find_btn">尋找隊友</button>
+        <button type="button" class="btn btn-warning" id="start_btn">開始答題</button>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.20/vue.js'></script>
+    <div class="score_page" id="score">
+        <p id="total_score">Total score : <span id="score_span">0</span></p>
+    </div>
     <!--Q1-->
     <div class="Question_page" id="Q1">
-        <h2 id="q1_q">
-            Question 0: JS爆炸
-        </h2>
+        <div class="row mt-5 pt-5">
+            <h1 id="q1_q" class="col align-self-center mt-5 pt-5">
+                Question 0: JS爆炸
+            </h1>
+        </div>
         <form id="Q1_form">
             <div>
-                <input type="button" class="0-0" name="Question1" value="JS爆炸了" id="q1_ans_0"><br>
+                <input type="button" value="JS爆炸了"><br>
             </div>
             <div>
-                <input type="button" class="0-1" name="Question1" value="JS爆炸了" id="q1_ans_1"><br>
+                <input type="button" value="JS爆炸了"><br>
             </div>
             <div>
-                <input type="button" class="0-2" name="Question1" value="JS爆炸了" id="q1_ans_2"><br>
+                <input type="button" value="JS爆炸了"><br>
             </div>
             <div>
-                <input type="button" class="0-3" name="Question1" value="JS爆炸了" id="q1_ans_3"><br>
+                <input type="button" value="JS爆炸了"><br>
             </div>
         </form>
     </div>
@@ -50,7 +66,7 @@
     <div id="end_page">
         <img alt="finish" src="{% static 'image/finish.png' %}" id="finish_img">
         <p id="final_p">Your Final Score: <span id="final_score"></span></p>
-        <button id="again_btn">再玩一次</button>
+        <button  type="button" class="btn btn-danger" id="again_btn">再玩一次</button>
     </div>
 </body>
 </html>

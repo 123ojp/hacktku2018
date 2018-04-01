@@ -6,7 +6,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         # fields = '__all__'
-        fields = ('id', 'score')
+        fields = ('id', 'score','first_name')
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:

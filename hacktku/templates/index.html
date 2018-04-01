@@ -5,7 +5,51 @@
 {% load static %}
 {% block content %}
 
-    <div class="col-md-4 offset-md-4">
-        <img src="{% static 'image/logo.png' %}">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-4 offset-md-4">
+                <img src="{% static 'image/logo.png' %}">
+            </div>
+
+        </div>
+        {% if not user.is_authenticated %}
+            <div class="row">
+
+                <div class="align-self-center col-md-4 offset-md-4 mt-3"><a class="pt-5" href="{% url 'login' %}">
+                    <button type="button" class="btn btn-block btn-md btn-info">點我登入玩遊戲</button>
+                </a>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="align-self-center col-md-4 offset-md-4 mt-3"><a class="pt-5" href="{% url 'dashboard' %}">
+                    <button type="button" class="btn btn-block btn-md btn-info">點我查看積分</button>
+                </a>
+                </div>
+
+            </div>
+        {% else %}
+            <div class="row">
+
+                <div class="align-self-center col-md-4 offset-md-4 mt-3"><a href="{% url 'game' %}">
+                    <button type="button" class=" btn btn-block btn-md btn-info">點我進入遊戲</button>
+                </a>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="align-self-center col-md-4 offset-md-4 mt-3"><a class="pt-5"
+                                                                            href="{% url 'score' request.user.id %}">
+                    <button type="button" class="btn btn-block btn-md btn-info">點我兌換獎品</button>
+                </a>
+                </div>
+
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
+

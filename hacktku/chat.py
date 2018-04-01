@@ -67,7 +67,7 @@ class ChatApplication(WebSocketApplication):
     #         }))
 
     def on_close(self, reason):
-        # print "Connection closed! "
+        print ("Connection closed! ")
         nickname=self.ws.handler.active_client.nickname
         #砍掉DB資料 (question_readquestion)
         read_db.Rm_data(nickname)

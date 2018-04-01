@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^game/$', views.game, name='game'),
     url(r'^dashboard/$', views.UserList.as_view(), name='dashboard'),
+    url(r'^score/(?P<pk>[0-9]+)$', views.UserDetail.as_view(), name='score'),
 ]

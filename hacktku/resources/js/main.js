@@ -3,11 +3,6 @@ var question = {};
 var resqmsg = {};
 var respmsg = {};
 var wsocket = new WebSocket("ws://127.0.0.1:8080/chat");
-wsocket.onopen = function(){
-	setmsg("nickname", nickname);//暱稱放這裡
-	setmsg("msg_type", "hello");
-	sent();
-}
 var currentQ = 0;
 var maxques = 5;
 var inte;
@@ -29,11 +24,19 @@ $(document).ready(function(){
 	});
 	$("#start_btn").hide();
 	$("#score").hide();
+	$("#teamate_2").hide()
+	$("#loading_gif").hide();
+	$("#loading_h3").hide();
 	$("#end_page").hide();
 });
 
 $("#find_btn").click(function(){
 	$("#find_btn").hide();
+	setmsg("nickname", nickname);//暱稱放這裡
+	setmsg("msg_type", "hello");
+	sent();
+	$("#loading_gif").show();
+	$("#loading_h3").show();
 	inte = setInterval(function(){
 		setmsg("msg_type", "waiting_fight");
 		sent();
@@ -47,6 +50,11 @@ wsocket.onmessage = function(e){
 	if(type == "waiting_respon"){
 		if(respmsg.people){
 			clearInterval(inte);
+			$("#teamate_2").show();
+			$("#teamate_").text(respmsg.teamate);
+			setteam(respmsg.teamate);
+			$("#loading_gif").hide();
+			$("#loading_h3").hide();
 			$("#start_btn").show();
 			$("#start_btn").click(function(){
 				setmsg("msg_type", "start_ques");
@@ -68,26 +76,13 @@ wsocket.onmessage = function(e){
 			$("#Q1_form input").show();
 			$("#q1_q").hide();
 			$("#Q1_form input").each(function(index){
-				console.log("set" + (index + 1));
 				$(this).prop("value", respQuestion[index]);
 				$(this).unbind();
 				$(this).click(function(){
-					console.log("click" + (index + 1));
+					$(this).unbind();
 					setmsg("msg_type", "answer");
 					setmsg("answer", index + 1);
 					sent();
-					currentQ++;
-					if(currentQ >= maxques){
-						$("#Q1").hide();
-						$("#score").hide();
-						$("#end_page").show();
-						setmsg("msg_type", "over_question");
-						sent();
-					}
-					else{
-						setmsg("msg_type", "start_ques");
-						sent();
-					}
 				});
 			});
 		}
@@ -98,15 +93,32 @@ wsocket.onmessage = function(e){
 		}
 	}
 	else if(type == "answer_respon"){
-		if(respmsg.correct){
-			alert("恭喜答對");
-			score = respmsg.score;
-			$("#score_span").text(score);
-			$("#final_score").text(score);
+		currentQ++;
+		if(currentQ >= maxques){
+			$("#Q1").hide();
+			$("#score").hide();
+			$("#end_page").show();
+			setTimeout(function(){
+				setmsg("msg_type", "over_question");
+				sent();
+			}, 2000);
 		}
 		else{
-			alert("答錯了");
+			setTimeout(function(){
+				setmsg("msg_type", "start_ques");
+				sent();
+			}, 2000);
 		}
+		if(respmsg.correct){
+			alertify.success("恭喜答對");
+
+		}
+		else{
+			alertify.error("答錯了");
+		}
+		score = respmsg.score;
+		$("#score_span").text(score);
+		$("#final_score").text(score);
 	}
 }
 
@@ -119,6 +131,13 @@ var timmerr = new Vue({
     }
 })
 
+function setteam(id) {
+	$.ajax({
+    url:"http://127.0.0.1:8000/api/userprofile/"+id+"/?format=json",
+    success:function(result){
+    	$("#teamate_").text(result['first_name']);}
+});
+}
 /*
 $("#Q1").hide();
 $("#timer").hide();
