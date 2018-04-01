@@ -2,6 +2,8 @@
 {% load  static %}
 
 {% block content %}
+        <link href="{% static  "style/alertify.min.css" %}" rel="stylesheet" type="text/css">
+
     <div class="well well-lg">
 
         <h2 class="mt-5">兌換頁面</h2>
@@ -17,24 +19,25 @@
             </thead>
             <tbody>
 
-                <tr>
+            <tr>
 
-                    <td>
-                        {{ object.first_name }}
-                    </td>
-                    <td>
-                        {{ object.score }}
-                    </td>
+                <td>
+                    {{ object.first_name }}
+                </td>
+                <td>
+                    {{ object.score }}
+                </td>
 
-                </tr>
+            </tr>
 
             </tbody>
 
         </table>
-            <table class="table table-bordered mt-5">
+        <table class="table table-bordered mt-5">
             <thead>
             <tr>
                 <th>兌換商品名稱</th>
+                <th>需求積分</th>
                 <th>兌換按鈕</th>
 
 
@@ -42,24 +45,65 @@
             </thead>
             <tbody>
 
-                <tr>
+            <tr>
+                <td>
+                    Nintendo Switch
+                </td>
+                <td>
+                    300000
+                </td>
+                <td>
+                    {% if object.score > 300000 %}
+                        <button class="btn-info">可兌換</button>'
+                    {% else %}
+                        餘額不足
+                    {% endif %}
+                </td>
+            </tr>
 
-                    <td>
-                        {{ object.first_name }}
-                    </td>
-                    <td>
-                        {{ object.score }}
-                    </td>
+            <tr>
+                <td>
+                    PS4
+                </td>
+                <td>
+                    250000
+                </td>
+                <td>
+                    {% if object.score > 250000 %}
+                        <button class="btn-info">可兌換</button>'
+                    {% else %}
+                        餘額不足
+                    {% endif %}
+                </td>
+            </tr>
 
-                </tr>
+            <tr>
+                <td>
+                    阿肥小公主的照片
+                </td>
+                <td>
+                    1000
+                </td>
+                <td>
+                    {% if object.score > 1000 %}
+
+                            <button class="btn btn-info btn-sm" onclick="alertify.confirm('是否要兌換', '確定要兌換嗎', function (event) {
+                                    window.location = '{%  url 'update' object.id  object.score|add:-1000 %}';}
+                                    , function(){ alertify.error('Cancel')});">
+                                可兌換</button>
+
+                    {% else %}
+                        餘額不足
+                    {% endif %}
+                </td>
+
+            </tr>
 
             </tbody>
         </table>
 
 
-
-
-
     </div>
+<script src="{% static  "js/alertify.min.js" %}" ></script>
 
 {% endblock %}

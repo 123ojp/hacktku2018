@@ -7,6 +7,7 @@ from .form import UserForm, SignUpForm
 from .models import UserProfile
 from .serializers import UserProfileSerializer, QuestionSerializer
 
+from django.shortcuts import get_object_or_404,redirect, render
 
 
 
@@ -54,12 +55,11 @@ class UserDetail(generic.DetailView):
     model = UserProfile
     template_name = 'user/score.html'
 
-    # def get_context_data(self, *args, **kwargs):
-    #     context = super(UserDetail, self).get_context_data(*args, **kwargs)
-    #     context['Question_list'] = Question.objects.all()
-    #     question = get_object_or_404(Question, qtoken=self.kwargs['questiontoken'])
-    #     context['Answer_list'] = Answer.objects.filter(aquestion=question)
-    #     return context
 
-    # def get_object(self):
-    #     return self.model.objects.filter(id=self.kwargs['id'])
+
+def UserDetail_update(request, id,newscore):
+    obj = get_object_or_404(UserProfile, id=id)
+    obj.score = newscore
+    obj.save(update_fields=["score"])
+    messages.success(request, '已購買')
+    return redirect('index')
